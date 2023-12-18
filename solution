@@ -1,0 +1,37 @@
+public class Solution {
+    public int solve(int[] A, int[] B) {
+        int count = 0;
+        HashSet<Pair> set = new HashSet<>();
+        int N = A.length;
+        for(int i = 0;i<N;i++) {
+             set.add(new Pair(A[i],B[i]));
+        }
+        for(int i = 0;i<N;i++){
+            for(int j = 0;j<N;j++){
+                if (A[i] < A[j] && B[i] < B[j] && set.contains(new Pair(A[i],B[j])) && set.contains(new Pair(A[j],B[i]))){
+                    count = count+1;
+                }
+            }
+        }
+        return count;
+    }
+}
+class Pair {
+    int x1;
+    int y1;
+     public Pair(int x1, int y1) {
+        this.x1 = x1;
+        this.y1 = y1;
+    }
+    @Override
+    public boolean equals(Object obj) {
+        Pair p = (Pair) obj;
+        return this.x1 == p.x1 && this.y1 == p.y1;
+    }
+    @Override
+    public int hashCode() {
+        // created unique hahcode so no duplicates will enter
+        return Objects.hash(x1, y1);
+    }
+    
+}
